@@ -38,9 +38,9 @@ def sexualReproduction(agent, k1, numNewborns, agentIndex): #Sexual Reproduction
         returnCall = tribe.roster[i].DNA[0]
         if agent is tribe.roster[i]:
             x = 0
-        #We masturbate. But this produces no children :(
-        elif (matingCall == returnCall).all(): #We found a potential sex buddy :D
-            if np.random.rand() < float(k1)/float(potentialPartners): #Expected births are
+
+        elif (matingCall == returnCall).all(): #We found a potential partner :D
+            if np.random.rand() < float(k1)/float(potentialPartners):
                 agent.reproduce()
                 children += 1
     return children
@@ -48,7 +48,7 @@ def sexualReproduction(agent, k1, numNewborns, agentIndex): #Sexual Reproduction
 
 
 #TERRIBLE!
-def div7(agent, arr, k1): #Can our agents detect whether a number is divisible by 7?
+def div7(agent, arr, k1): #Can our agents detect whether a number is divisible by 7? Not as currently devised...
     tribe = agent.tribe
     m = agent.tribe.m
     n = agent.tribe.n
@@ -70,7 +70,7 @@ def div7(agent, arr, k1): #Can our agents detect whether a number is divisible b
         deaths = killProcess(agent, 4, 0)
     return [children, deaths, out[0]]
 
-def square(agent, num):
+def passThrough(agent, num):
     tribe = agent.tribe
     m = agent.m
     n = agent.n
@@ -146,7 +146,7 @@ while cnt < 20000:
             deaths += 1
             continue
         t = time.time()
-        score = square(agent, num)
+        score = passThrough(agent, num)
         elapsed = time.time() - t
         if elapsed > thinkThreshold/(westerners.size) and np.random.rand() < 0.5:
             agent.die()
