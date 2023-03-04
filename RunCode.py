@@ -128,7 +128,7 @@ timeReproducing = 0
 timeThinking = 0
 timeSorting = 0
 
-thinkThreshold = 0.06*np.sin(2*np.pi*cnt/1000 + np.pi/2) + 0.12
+thinkThreshold = 0.03*np.sin(2*np.pi*cnt/1000 + np.pi/2) + 0.15
 
 outsize = 50
 num = [i for i in range(outsize)]
@@ -248,7 +248,7 @@ while cnt < 20000:
 bestAgent = westerners.getBestAgent()
 
 num = [k for k in range(outsize)]
-o = square(bestAgent, num)
+o = passThrough(bestAgent, num)
 print("Final test")
 print("input: " + str(num))
 print("output: " + str(bestAgent.conceptualLogic(num)))
