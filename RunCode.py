@@ -87,7 +87,7 @@ def passThrough(agent, num):
 
 
 popSize = 200
-m = 40
+m = 60
 n = 10
 westerners = Tribe()
 
@@ -155,16 +155,12 @@ while cnt < 20000:
         agent.fitness = score - 10000*elapsed
     
     # Randomly increase num
-    for i in range(len(num)):
-        if np.random.rand() < 0.001:
-            num[i] = num[i] + 1
+#    for i in range(len(num)):
+#        if np.random.rand() < 0.001:
+#            num[i] = num[i] + 1
         
     timeThinking += time.time() - tt
 
-    #asexualReproduction(agent, 20, 2)
-
-        #d = killProcess(agent, 5000, 1)
-        #deaths += d
     ts = time.time()
     westerners.sexuallyRank()
     timeSorting += time.time() - ts
