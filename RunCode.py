@@ -87,7 +87,7 @@ def passThrough(agent, num):
 
 
 popSize = 200
-m = 60
+m = 120
 n = 10
 westerners = Tribe()
 
@@ -128,7 +128,7 @@ timeReproducing = 0
 timeThinking = 0
 timeSorting = 0
 
-thinkThreshold = 0.03*np.sin(2*np.pi*cnt/1000 + np.pi/2) + 0.15
+thinkThreshold = 0.03*np.sin(2*np.pi*cnt/1000 + np.pi/2) + 0.2
 
 outsize = 50
 num = [i for i in range(outsize)]
@@ -141,7 +141,7 @@ while cnt < 20000:
     tt = time.time()
     for i in range(westerners.size):
         agent = tempRoster[i]
-        if time.time() - tt > thinkThreshold:
+        if time.time() - tt > thinkThreshold and np.random.rand():
             agent.die()
             deaths += 1
             continue
@@ -183,11 +183,11 @@ while cnt < 20000:
         partner = min(round(p), len(boys)-1)
         
         for k in range(np.random.randint(5) + 1):
-                girl.reproduce(boys[partner])
-                births += 1
-                #print("Rank " + str(boy.fitnessRank) + " boy mated with rank " + str(girl.fitnessRank) + " girl")
-                bmates[boys[partner].fitnessRank-1] += 1
-                gmates[girl.fitnessRank-1] += 1
+            girl.reproduce(boys[partner])
+            births += 1
+            #print("Rank " + str(boy.fitnessRank) + " boy mated with rank " + str(girl.fitnessRank) + " girl")
+            bmates[boys[partner].fitnessRank-1] += 1
+            gmates[girl.fitnessRank-1] += 1
     timeReproducing += time.time() - tr
     cnt += 1
     if (cnt % 10 == 0):
@@ -209,7 +209,9 @@ while cnt < 20000:
         print("Average m: " + str(avgM))
         print("Variance m: " + str(varM))
         bestAgent = westerners.getBestAgent()
+        print("Desired output array:")
         print(np.array(num))
+        print("Most fit agent's computed output array:")
         print(bestAgent.conceptualLogic(num))
         score = 0
         trainingCorrect = 0
@@ -242,7 +244,7 @@ while cnt < 20000:
         correctDivides = 0
         deaths = 0
     deaths += westerners.killAndGrow(2)
-    thinkThreshold = 0.06*np.sin(2*np.pi*cnt/1000 + np.pi/2) + 0.12
+    thinkThreshold = 0.03*np.sin(2*np.pi*cnt/1000 + np.pi/2) + 0.2
 
 #raw_input("Press a key to continue")
 bestAgent = westerners.getBestAgent()
